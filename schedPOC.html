@@ -15,6 +15,8 @@
     input[type="radio"]{
       display:none;
     }
+    .display {display: block;}
+
     .customRadio{
       height:18px;
       width:18px;
@@ -69,14 +71,15 @@
               <option value="" title="">Select Type</option>
           </select> -->
           <p> What kind of {{selectedProduct["product"]}} do you have? </p>
-
-          <div ng-repeat="productType in selectedProduct['types']">
-            <label for="productType-{{productType.product_type}}">
-              <input type="radio" id="productType-{{productType.product_type}}" name="taskGroup" ng-model="$parent.selectedType" ng-value="productType">
-              <div class="customRadio"></div>
-              {{productType.product_type}}
-            </label>
-          </div>
+          <form>
+            <div ng-repeat="productType in selectedProduct['types']">
+              <label for="productType-{{productType.product_type}}">
+                <input type="radio" id="productType-{{productType.product_type}}" name="taskGroup" ng-model="$parent.selectedType" ng-value="productType"/>
+                <div class="customRadio"></div>
+                {{productType.product_type}}
+              </label>
+            </div>
+          </form>
           <div class="schedulerLabelError error">
               <div class="errorIcon"></div>
               <span class="errorMsg"></span>
@@ -85,12 +88,15 @@
 
       <fieldset>
         <p> Do you have a warranty? </p>
-        <div ng-repeat="warrantyType in warrantyStatusOptions">
-          <label for="warrantyType-{{warrantyType}}">
-            <input type="radio" id="warrantyType-{{warrantyType}}" name="taskGroup" ng-model="$parent.warrantyStatus" ng-value="warrantyType">
-            <div class="customRadio"></div>
-            {{warrantyType}}
-        </div>
+        <form>
+          <div ng-repeat="warrantyType in warrantyStatusOptions">
+            <label for="warrantyType-{{warrantyType}}">
+              <input type="radio" id="warrantyType-{{warrantyType}}" name="taskGroup" ng-model="$parent.warrantyStatus" ng-value="warrantyType"/>
+              <div class="customRadio"></div>
+              {{warrantyType}}
+            </label>
+          </div>
+        </form>
 
         <div class="schedulerLabelError error">
             <div class="errorIcon"></div>
@@ -113,12 +119,15 @@
 
           <fieldset>
             <p> What problem are you having? </p>
-              <div ng-repeat="problem in selectedType['nature_of_problem']">
-                <label for="problem-{{problem}}">
-                  <input type="radio" id="problem-{{problem}}" name="taskGroup" ng-model="$parent.natureOfProblem" ng-value="problem">
-                  <div class="customRadio"></div>
-                  {{problem}}
-              </div>
+              <form>
+                <div ng-repeat="problem in selectedType['nature_of_problem']">
+                  <label for="problem-{{problem}}">
+                    <input type="radio" id="problem-{{problem}}" name="taskGroup" ng-model="$parent.natureOfProblem" ng-value="problem"/>
+                    <div class="customRadio"></div>
+                    {{problem}}
+                  </label>
+                </div>
+              </form>
 
               <div class="schedulerLabelError error">
                   <div class="errorIcon"></div>
