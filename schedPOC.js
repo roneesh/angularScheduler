@@ -49,4 +49,16 @@ function stepOneCtrl($scope, productData) {
 	$scope.displayProductData = function() {
 		return $scope.productData;
 	}
+
+	$scope.$watch('selectedType', function(value) {
+       $scope.selectedBrand = undefined;
+       $scope.natureOfProblem = undefined;
+ 	});
+
+ 	$scope.$watch('selectedProduct', function(value) {
+       $scope.selectedType = undefined;
+       $scope.selectedBrand = undefined;
+       $scope.natureOfProblem = undefined;
+ 	});
+
 }

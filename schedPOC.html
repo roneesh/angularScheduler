@@ -71,8 +71,8 @@
           <p> What kind of {{selectedProduct["product"]}} do you have? </p>
 
           <div ng-repeat="productType in selectedProduct['types']">
-            <label for="productType-{{productType}}">
-              <input type="radio" id="productType-{{productType}}" name="taskGroup" ng-model="$parent.selectedType" ng-value="productType">
+            <label for="productType-{{productType.product_type}}">
+              <input type="radio" id="productType-{{productType.product_type}}" name="taskGroup" ng-model="$parent.selectedType" ng-value="productType">
               <div class="customRadio"></div>
               {{productType.product_type}}
             </label>
@@ -86,7 +86,10 @@
       <fieldset>
         <p> Do you have a warranty? </p>
         <div ng-repeat="warrantyType in warrantyStatusOptions">
-          <input type="radio" name="taskGroup" ng-model="$parent.warrantyStatus" ng-value="warrantyType">{{warrantyType}}
+          <label for="warrantyType-{{warrantyType}}">
+            <input type="radio" id="warrantyType-{{warrantyType}}" name="taskGroup" ng-model="$parent.warrantyStatus" ng-value="warrantyType">
+            <div class="customRadio"></div>
+            {{warrantyType}}
         </div>
 
         <div class="schedulerLabelError error">
@@ -110,12 +113,13 @@
 
           <fieldset>
             <p> What problem are you having? </p>
-              <div ng-repeat="problem in selectedType['nature_of_problem]">
-                <input type="radio" name="taskGroup" ng-model="$parent.natureOfProblem" ng-value="problem">{{problem}}
+              <div ng-repeat="problem in selectedType['nature_of_problem']">
+                <label for="problem-{{problem}}">
+                  <input type="radio" id="problem-{{problem}}" name="taskGroup" ng-model="$parent.natureOfProblem" ng-value="problem">
+                  <div class="customRadio"></div>
+                  {{problem}}
               </div>
-              <select ng-model="natureOfProblem" ng-options="problem for problem in selectedType['nature_of_problem'] "title="Nature of Problem" name="Nature of problem" class="required" id="problemList">
-                  <option value="" title="">Nature of Problem</option>
-              </select>
+
               <div class="schedulerLabelError error">
                   <div class="errorIcon"></div>
                   <span class="errorMsg"></span>
