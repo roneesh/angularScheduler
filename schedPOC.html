@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html ng-app="scheduler">
+<head>
+	<script src="angular.min.js"></script>
+	<script src="underscore.js"></script>
+	<script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+
+	<script src="schedPOC.js"></script>
+	<title> SchedulerPOC</title>
+	<style>
+		.done-true { text-decoration: line-through; color: gray;}
+    .container { width: 320px; margin: 0 auto;}
+	</style>
+</head>
+
+<body class="container">
+<div class="steps step1 current" ng-controller="stepOneCtrl">
+  <div class="stepHead">
+      <!-- <span class="accent"><span class="stepNumber">1</span></span> -->
+      <h3>How can we help you?</h3>
+  </div>
+    <input type="hidden" id="hidden_service_type" value="${schedulerPage.schedulerInformation.serviceName}"/>
+    <input type="hidden" id="schedulerProductGroup" value="<s:property value='schedulerPage.schedulerInformation.productGroup'/>"/>
+    <input type="hidden" id="schedulerProduct" value="<s:property value='schedulerPage.schedulerInformation.product'/>"/>
+    <input type="hidden" id="schedulerMerchandiseCode" value="<s:property value='schedulerPage.schedulerInformation.merchandiseCode'/>"/>
+  <div class="stepBody">
+      <p>Please provide some more information about your
+      product so we can direct you to a technician that specializes in your repair.</p>
+
+      <h3> Selected Product: {{selectedProduct["product"]}} </h3>
+      <h3> Selected Type: {{selectedType["product_type"]}} </h3>
+      <h3> Selected Brand: {{selectedBrand}} </h3>
+      <h3> Your Problem: {{natureOfProblem}} </h3>
+      <h3> Warranty Status: {{warrantyStatus}} </h3>
+
+      <fieldset>
+          <div class="schedulerLabelError error">
+              <div class="errorIcon"></div>
+              <span class="errorMsg"></span>
+          </div>
+
+          <span  class="nullable">
+            <select ng-model="selectedProduct" ng-options="singleProduct.product for singleProduct in productData">
+              <option value="">-- Select Product --</option>
+            </select>
+          </span>
+      </fieldset>
+
+      <fieldset>
+<!--           <select ng-model="selectedType" ng-options="productType.product_type for productType in selectedProduct['types']"title="Product" name="subproduct" id="subprodList">
+              <option value="" title="">Select Type</option>
+          </select> -->
+          <p> What kind of {{selectedProduct["product"]}} do you have? </p>
+
+          <div ng-repeat="productType in selectedProduct['types']">
+            <input type="radio" name="taskGroup" ng-model="$parent.selectedType" ng-value="productType">{{productType.product_type}}
+
+          </div>
+          <div class="schedulerLabelError error">
+              <div class="errorIcon"></div>
+              <span class="errorMsg"></span>
+          </div>
+      </fieldset>
+
+      <fieldset>
+        <p> Do you have a warranty? </p>
+        <div ng-repeat="warrantyType in warrantyStatusOptions">
+          <input type="radio" name="taskGroup" ng-model="$parent.warrantyStatus" ng-value="warrantyType">{{warrantyType}}
+        </div>
+
+        <div class="schedulerLabelError error">
+            <div class="errorIcon"></div>
+            <span class="errorMsg"></span>
+        </div>
+      </fieldset>
+
+      <div id="productDetailsLists">
+          
+          <fieldset>
+            <p> The more information we have for our technicans creates a better repair experience for you. </p>
+              <select ng-model="selectedBrand" ng-options="brand for brand in selectedType['brands'] " title="Brand" name="brand" class="required" id="brandList">
+                  <option value="" title="">Brand</option>
+              </select>
+              <div class="schedulerLabelError error">
+                  <div class="errorIcon"></div>
+                  <span class="errorMsg"></span>
+              </div>
+          </fieldset>
+
+          <fieldset>
+            <p> What problem are you having? </p>
+              <div ng-repeat="problem in selectedType['nature_of_problem]">
+                <input type="radio" name="taskGroup" ng-model="$parent.natureOfProblem" ng-value="problem">{{problem}}
+              </div>
+              <select ng-model="natureOfProblem" ng-options="problem for problem in selectedType['nature_of_problem'] "title="Nature of Problem" name="Nature of problem" class="required" id="problemList">
+                  <option value="" title="">Nature of Problem</option>
+              </select>
+              <div class="schedulerLabelError error">
+                  <div class="errorIcon"></div>
+                  <span class="errorMsg"></span>
+              </div>
+          </fieldset>
+
+
+      </div>
+
+      <div class="buttons">
+          <button class="btn buttonOrangeCTA inactiveBtn" type="button">Next</button>
+      </div>
+  </div>
+</div>
+
+
+</body>
+</html>
