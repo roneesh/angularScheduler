@@ -62,3 +62,12 @@ function stepOneCtrl($scope, productData) {
  	});
 
 }
+
+
+scheduler.directive('myFirstDirective', function() {
+	return function(scope, element, attrs) {
+		element.text(scope.productData + attrs.message);
+	}
+});
+
+
